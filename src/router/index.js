@@ -7,6 +7,8 @@ import ListaProyectoView from '@/views/ListaProyecto.vue'
 import VerProyectoView from '@/views/VerProyecto.vue'
 import CrearProyectoView from '@/views/CrearProyecto.vue'
 import EntregaView from '@/views/Entrega.vue'
+import Desarrolladores from '../views/Desarrolladores.vue'
+import PoliticasyPrivacidad from '@/views/PoliticasyPrivacidad.vue'
 
 Vue.use(VueRouter)
 
@@ -46,6 +48,18 @@ const routes = [
     name: 'entrega',
     component: EntregaView
   },
+  {
+    path:'/Desarrolladores',
+    name: 'Desarrolladores',
+    component: Desarrolladores
+  },
+  {
+    path:'/PoliticasyPrivacidad',
+    name: 'PoliticasyPrivacidad',
+    component:PoliticasyPrivacidad
+  },
+  
+  
 ]
 
 const router = new VueRouter({
