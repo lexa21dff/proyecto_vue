@@ -144,7 +144,7 @@
       async postProyecto(){
         console.log(this.proyecto)
         await this.axios.post('http://127.0.0.1:8000/api/proyecto/', this.proyecto)
-        this.$router.push('/Inicio')
+        this.$router.push('/ListaProyecto')
       }
     },
     async mounted(){

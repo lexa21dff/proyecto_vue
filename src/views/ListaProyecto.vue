@@ -46,12 +46,13 @@
           }
       },
       methods:{
-          async getProyecto(){
-              await axios.get("http://127.0.0.1:8000/api/proyecto/").then(response=>{
+          getProyecto(){
+              axios.get("http://127.0.0.1:8000/api/proyecto/").then(response=>{
               this.proyectos= response.data
             })
           },
           descripcion(descripcion){
+            // descripcion corta
             if (descripcion.length > 100) {
               const index = descripcion.slice(100).search(/[.]/);
                 if (index !== -1) {
@@ -79,8 +80,9 @@
   
   
       },
-      async mounted() {  
-          await this.getProyecto()
+      mounted() {  
+          this.getProyecto()
+         
   
       },
           
