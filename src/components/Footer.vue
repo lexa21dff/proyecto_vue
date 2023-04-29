@@ -6,9 +6,8 @@
        </div> 
        <div>
          <a href="/Desarrolladores">Desarrolladores</a>
-         <a href="/Terminos">Desarrolladores</a>
-         <a href="/PoliticasyPrivacidad">Desarrolladores</a>
-         <a href="/Desarrolladores">Desarrolladores</a>
+         <a href="/Terminos">Terminos y condiciones </a>
+         <a href="/PoliticasyPrivacidad">Politiacs y privacidad </a>
        </div>
     </div>
 </template>
