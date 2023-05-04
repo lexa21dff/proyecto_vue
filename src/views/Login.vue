@@ -1,5 +1,7 @@
 <template>
+    
     <div class="container" id="app">
+    <div class="cards">
   <h1>Login</h1>
   <form @submit.prevent="submitForm">
  
@@ -12,7 +14,9 @@
       <input type="password" class="form-control" id="password" name="password" v-model="password">
     </div>
     <button type="submit" class="btn btn-primary">Login</button>
-  </form>
+    </form>
+   <a href="#">Sign Up</a>
+</div>
 </div>
 </template>
 
@@ -85,3 +89,24 @@ export default {
     }
 }
 </script> 
+
+<style>
+.container{
+    display: flex;
+	justify-content: center;
+	
+}
+.cards{
+    display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+    position: relative;
+	background-color: #82DEF0;
+	height: 360px;
+    width: 360px;
+	margin: 5em;
+	text-align: center;
+
+}
+</style>
