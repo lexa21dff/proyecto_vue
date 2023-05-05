@@ -9,6 +9,7 @@ import CrearProyectoView from '@/views/CrearProyecto.vue'
 import EntregaView from '@/views/Entrega.vue'
 import Desarrolladores from '../views/Desarrolladores.vue'
 import PoliticasyPrivacidad from '@/views/PoliticasyPrivacidad.vue'
+import terminosycondicionesVue from '@/views/terminosycondiciones.vue'
 
 Vue.use(VueRouter)
 
@@ -57,6 +58,11 @@ const routes = [
     path:'/PoliticasyPrivacidad',
     name: 'PoliticasyPrivacidad',
     component:PoliticasyPrivacidad
+  },
+  {
+    path:'/terminosycondiciones',
+    name: 'terminosycndiciones',
+    component:terminosycondicionesVue
   },
   
   

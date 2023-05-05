@@ -8,8 +8,8 @@
       <ul>
         <Ideas> </Ideas>
       </ul>
-      <b-img src="https://res-console.cloudinary.com/dt5mbmxva/thumbnails/transform/v1/image/upload/Y19zY2FsZSxoXzMxNSx3XzEyOTg=/v1682784977/dGFtYW5vcy1kZS1sYXMtaW1hZ2VuZXMtZGUtbGFzLXJlZGVzLXNvY2lhbGVzX3RlNjZmbA==/template_primary" fluid-grow alt="Fluid-grow image"></b-img>
-    </body>
+     
+     </body>
     <Footer>
     </Footer>
   </div>
@@ -32,7 +32,10 @@
 </script>
 
 <style>
-
+.imagenes{
+  background-color: aqua;
+ 
+}
 
 
 
