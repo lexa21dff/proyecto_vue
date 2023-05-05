@@ -8,7 +8,7 @@
       
       
       </b-col>
-      <h1>  tienes ua idea </h1> 
+      <h1>  tienes una idea </h1> 
        <h2> vamos a crearla </h2>
   </b-row>
 </b-container>
@@ -25,6 +25,8 @@
   border-style: solid;
   border-color:#B5B2B2;
   margin:5px 5px 5px 5px ;
+  background-color: aqua;
+
 
 font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 
