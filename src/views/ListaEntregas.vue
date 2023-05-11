@@ -1,0 +1,82 @@
+<template>
+    <div>
+      <h1>Entregas de {{ proyecto.nombre }}</h1>
+      <b-card>
+        <b-list-group>
+          <b-list-group-item v-for="entrega in entregas" :key="entrega.id" >
+            {{this.getTiposDeRevision(entrega.tipo_revision) }}
+            
+          </b-list-group-item>
+        </b-list-group>
+        <b-button v-if="mostrarBoton" @click="cargarMas" block>Ver más</b-button>
+      </b-card>
+    </div>
+  </template>
+  
+  <script>
+  import axios from 'axios'
+
+  export default{
+      name:'Lista',
+      data(){
+          return{
+            tipo_revision:null,
+            entregas:[],
+            searchValue: "",
+            proyecto: [],
+            proyectos: null
+          }
+          
+      },
+      methods:{
+
+          getEntregas(){
+              axios.get("http://127.0.0.1:8000/api/entrega/").then(response=>{
+              this.entregas= response.data
+            })
+        },
+        getTiposDeRevision(url){
+              axios.get(url).then(response=>{
+                this.tipo_revision = response.data.nombre
+                console.log(this.tipo_revision)
+        
+            })
+          },
+          descripcion(descripcion){
+            // descripcion corta
+            if (descripcion.length > 100) {
+              const index = descripcion.slice(100).search(/[.]/);
+                if (index !== -1) {
+                  return descripcion.slice(0, 100 + index + 1) + '...';
+                }
+            }
+            return descripcion;
+          },
+      async search() {
+        try {
+          const response = await axios.get("buscar_Entregass/", {
+            params: {
+              search: this.searchValue,
+            },
+          });
+          this.Entregas = response.data;
+        } catch (error) {
+          console.log(error);
+        }
+        
+      },
+      async verEntregas(id){
+        this.$router.push('/detalle-entrega/'+id)
+      },
+  
+  
+      },
+      mounted() {  
+          this.getEntregas()
+         
+  
+      },
+          
+  
+  }
+  </script>

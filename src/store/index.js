@@ -1,10 +1,17 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import createPersistedState from "vuex-persistedstate";
 
 Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
+
+    rol:'',
+    username:'',
+
+    perfil:'',
+
     user: {
       token: '',
       isAuthenticated: false,
@@ -14,14 +21,7 @@ export default new Vuex.Store({
   getters: {
   },
   mutations: {
-        //se utiliza para inicializar el estado del objeto userdel almacenamiento Vuex. 
-  //Verifica si hay un token almacenado en el almacenamiento local del navegador
-  //(localStorage) y establece el estado de user.token y user.isAuthenticated en consecuencia.
     initializeStore(state) {
-      //En este caso, la expresión localStorage.getItem('token') se utiliza para verificar si hay un token almacenado 
-      //en el almacenamiento local del navegador. Si el método getItem() encuentra un valor con la clave "token" 
-      //en el almacenamiento local, entonces la condición if se evaluará como verdadera y se ejecutará el bloque de 
-      //código dentro de ella.
       if (localStorage.getItem('token')) {
         state.user.token = localStorage.getItem('token'),
         state.user.isAuthenticated = true
@@ -31,20 +31,38 @@ export default new Vuex.Store({
       }
     },
     setToken(state, token) {
-      //se utiliza para establecer el token de usuario en el almacenamiento de Vuex 
-      //y establecer isAuthenticated como verdadero.
       state.user.token = token,
       state.user.isAuthenticated = true
     },
+    setUsername(state, perfil) {
+      state.perfil = perfil
+    },
+    setRol(state, rol) {
+      state.rol = rol
+    },
     removeToken(state) {
-      //se utiliza para eliminar el token de usuario del almacenamiento de Vuex
-      // y establecer isAuthenticated como falso.
       state.user.token = '',
       state.user.isAuthenticated = false
+    },
+    clearState(state) {
+      state.user = {
+        token: '',
+        isAuthenticated: false,
+      },
+      state.username = ''
+      state.rol = ''
+
+      state.perfil = ''
+
+
     }
   },
   actions: {
   },
   modules: {
-  }
+  },
+  plugins: [createPersistedState({
+    paths: ['user', 'perfil']
+  })]
 })
+

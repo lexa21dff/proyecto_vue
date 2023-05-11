@@ -1,7 +1,17 @@
 <template>
   <div >
     <nav>
-      <Nabvar></Nabvar>
+      <template v-if="$store.state.user.isAuthenticated">
+        <template v-if="rol ='Aprendiz' ">
+          <NabvarAprendiz></NabvarAprendiz>
+        </template>
+        <template v-else>
+          <NabvarInstructor></NabvarInstructor>
+        </template>
+      </template>
+      <template v-else>
+        <Nabvar></Nabvar>
+      </template>
     </nav>
     <router-view/>
   </div>
@@ -9,9 +19,14 @@
 <script>
 import axios from 'axios'
 import Nabvar from '@/components/Nabvar.vue';
+import NabvarAprendiz from '@/components/NabvarAprendiz.vue';
+import NabvarInstructor from '@/components/NabvarInstructor.vue';
+
 export default {
   components:{
-    Nabvar
+    Nabvar,
+    NabvarAprendiz,
+    NabvarInstructor
   },
   methods:{
 

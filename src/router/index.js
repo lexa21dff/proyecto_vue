@@ -7,6 +7,7 @@ import ListaProyectoView from '@/views/ListaProyecto.vue'
 import VerProyectoView from '@/views/VerProyecto.vue'
 import CrearProyectoView from '@/views/CrearProyecto.vue'
 import EntregaView from '@/views/Entrega.vue'
+import ListaEntrega from '@/views/ListaEntregas.vue'
 import Desarrolladores from '../views/Desarrolladores.vue'
 import PoliticasyPrivacidad from '@/views/PoliticasyPrivacidad.vue'
 import terminosycondicionesVue from '@/views/terminosycondiciones.vue'
@@ -48,6 +49,11 @@ const routes = [
     path:'/entrega',
     name: 'entrega',
     component: EntregaView
+  },
+  {
+    path:'/lista-entrega',
+    name: 'lista-entrega',
+    component: ListaEntrega
   },
   {
     path:'/Desarrolladores',
