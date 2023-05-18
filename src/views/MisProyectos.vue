@@ -1,18 +1,4 @@
-<!-- <template>
-    <div>
-      <h1>Entregas de {{ proyecto.nombre }}</h1>
-      <b-card>
-        <b-list-group>
-          <b-list-group-item v-for="entrega in entregas" :key="entrega.id" >
-            {{entrega.descripcion_entrega }}
-            
-          </b-list-group-item>
-        </b-list-group>
-        <b-button v-if="mostrarBoton" @click="cargarMas" block>Ver más</b-button>
-      </b-card>
-    </div>
-  </template> -->
-  <template>
+<template>
     <div>
       <h1>Entregas de {{ proyecto.nombre }}</h1>
       <b-card>
