@@ -12,6 +12,11 @@ import Desarrolladores from '../views/Desarrolladores.vue'
 import PoliticasyPrivacidad from '@/views/PoliticasyPrivacidad.vue'
 import terminosycondicionesVue from '@/views/terminosycondiciones.vue'
 
+import CrearGrupo from '@/views/CrearGrupo.vue'
+import ListaMiembrosGrupo from '@/components/ListaMiembrosGrupo'
+import ListaGrupos from '@/components/ListaGrupos'
+import AgregarMiembros from '@/components/AgregarMiembros'
+import grupo from '@/components/Grupo'
 Vue.use(VueRouter)
 
 const routes = [
@@ -70,6 +75,31 @@ const routes = [
     name: 'terminosycndiciones',
     component:terminosycondicionesVue
   },
+  {
+    path:'/AgregarMiembros/:id',
+    name: 'AgregarMiembros',
+    component: AgregarMiembros
+  },
+  {
+    path:'/grupo/:id',
+    name: 'grupo',
+    component: grupo
+  },
+  {
+    path:'/CrearGrupo',
+    name: 'CrearGrupo',
+    component: CrearGrupo
+  },
+  {
+    path:'/ListaMiembrosGrupo',
+    name: 'ListaMiembrosGrupo',
+    component: ListaMiembrosGrupo
+  },
+  {
+    path:'/ListaGrupos',
+    name: 'ListaGrupos',
+    component: ListaGrupos
+  }
   
   
 ]
