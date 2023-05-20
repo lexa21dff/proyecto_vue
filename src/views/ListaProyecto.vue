@@ -75,7 +75,7 @@
         
       },
       async verProyecto(id){
-        this.$router.push('/verProyecto/'+id)
+        this.$router.push('/ver-proyecto/'+id)
       },
   
   

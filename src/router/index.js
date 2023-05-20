@@ -31,18 +31,18 @@ const routes = [
     component: InicioView
   },
   {
-    path: '/ListaProyecto',
-    name: 'ListaProyecto',
+    path: '/lista-proyecto',
+    name: 'lista-proyecto',
     component: ListaProyectoView
   },
   {
-    path:'/verProyecto/:id',
-    name: 'verProyecto',
+    path:'/ver-proyecto/:id',
+    name: 'ver-proyecto',
     component: VerProyectoView
   },
   {
-    path:'/crearProyecto',
-    name: 'crearProyecto',
+    path:'/crear-proyecto',
+    name: 'crear-proyecto',
     component: CrearProyectoView
   },
   {

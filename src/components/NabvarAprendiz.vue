@@ -7,13 +7,13 @@
       <b-collapse id="nav-collapse" is-nav>
         <b-navbar-nav>
           <!-- Enlaces de router a la izquierda  -->
-          <b-nav-item to="/">Inicio</b-nav-item>
-          <b-nav-item to="/acerca">Acerca</b-nav-item>
+          <b-nav-item to="/Inicio">Inicio</b-nav-item>
+
         </b-navbar-nav>
   
         <b-navbar-nav class="ml-auto">
           <!-- Enlaces de router a la derecha -->
-          <b-nav-item to="/proyectos">Proyectos</b-nav-item>
+          <b-nav-item to="/lista-proyecto">Proyectos</b-nav-item>
           
           <b-nav-item-dropdown text="Fichas" right>
             <b-dropdown-item to="/crear-proyecto">Crear grupo</b-dropdown-item>
