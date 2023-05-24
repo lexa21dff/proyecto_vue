@@ -60,7 +60,7 @@
     //     this.proyectoOptions = response.data.results.map(p => ({
     //       value: p.id,
     //       text: p.nombre,
-    //     }))
+    //     })) 
     //   },
     //   async fetchTipoRevision() {
     //     const response = await axios.get('/api/tipo-revision/', {

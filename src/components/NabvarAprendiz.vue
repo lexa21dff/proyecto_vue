@@ -1,5 +1,5 @@
 <template>
-    <b-navbar toggleable="lg" type="light" variant="light">
+    <b-navbar class="navbar" toggleable="lg"  >
       <b-navbar-brand href="#">Projeck Banck </b-navbar-brand>
   
       <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
@@ -10,6 +10,7 @@
           <b-nav-item to="/Inicio">Inicio</b-nav-item>
 
         </b-navbar-nav>
+        
   
         <b-navbar-nav class="ml-auto">
           <!-- Enlaces de router a la derecha -->
@@ -21,7 +22,7 @@
           </b-nav-item-dropdown>
           <b-nav-item-dropdown text="Mis Proyectos" right>
             <b-dropdown-item to="/crear-proyecto">Crear Proyecto</b-dropdown-item>
-            <b-dropdown-item to="/ver-proyecto">Ver Proyecto</b-dropdown-item>
+            <b-dropdown-item to="/mis-proyectos">Ver Proyecto</b-dropdown-item>
           </b-nav-item-dropdown>
           <b-nav-item to="/mis-proyectos">{{ rol }}</b-nav-item>
           <b-nav-item  @click="logout()">cerrar sesion</b-nav-item>
@@ -79,5 +80,11 @@
       }
   }
   </script>
+  <style>
+  .navbar {
+  padding: 2rem;
+  background-color: #5C9DBA;
+}
+</style>
   
   

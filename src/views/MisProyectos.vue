@@ -1,24 +1,39 @@
 <template>
     <div>
-      <h1>Entregas de {{ proyecto.nombre }}</h1>
-      <b-card>
-        <b-list-group>
-          <b-list-group-item v-for="entrega in entregas" :key="entrega.id">
-            <div class="d-flex justify-content-between align-items-center">
-              <div>{{ entrega.descripcion_entrega }}</div>
-              <div>
-                <b-button @click="verEntrega(entrega)" variant="primary" class="mr-2">Ver</b-button>
-                <b-button @click="editarEntrega(entrega)" variant="warning" class="mr-2">Editar</b-button>
-                <b-button @click="eliminarEntrega(entrega)" variant="danger">Eliminar</b-button>
-              </div>
-            </div>
-          </b-list-group-item>
-        </b-list-group>
-        <b-button v-if="mostrarBoton" @click="cargarMas" block>Ver más</b-button>
-      </b-card>
+      <div class="cointainer d-flex justify-content-center">
+        <table>
+          <tbody>
+            <tr v-for="proyecto in proyectos " :key="proyecto.id">
+              <!-- <div class="row" >
+                <div class="container"> -->
+                  <b-card class="m-1 p-3">
+                    <div class="row">
+                      <div class="col-lg-1 col-md-1">
+                          <img class="imagen" src="../assets/2.jpg" alt="">
+                        </div>
+                        <div class="col-lg-9">
+                            <h3>{{ proyecto.nombre_proyecto }}</h3>
+                          <p ><span class="fw-lighter" >Estado: </span>{{ proyecto.estado }}</p>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <p class="fw-lighter">Descripcion:</p>
+                        <p>{{ descripcion(proyecto.descripcion) }}</p>
+                      </div>
+                      <img class="position-absolute bottom-0 end-0" src="../assets/iconos/verProyecto.png" alt="" @click="verProyecto(proyecto.id)">
+                  </b-card>
+                <!-- </div>
+              </div> -->
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
-  </template>
-
+      
+    </template>
+    
+  
+  
   <script>
   import axios from 'axios'
 
@@ -26,27 +41,40 @@
       name:'Lista',
       data(){
           return{
-            tipo_revision:null,
-            entregas:[],
-            searchValue: "",
-            proyecto: [],
-            proyectos: null
+            contador:0, 
+            grupos:null,
+              searchValue: "",
+              proyecto: [],
+              proyectos: []
           }
-          
       },
       methods:{
-
-          getEntregas(){
-              axios.get("http://127.0.0.1:8000/api/entrega/").then(response=>{
-              this.entregas= response.data
-            })
+        recorrerProyectosConProyecto(grupos) {
+          for (let i = 0; i < grupos.length; i++) {
+            let grupo= grupos[i];
+            this.getProyecto(grupo.proyecto_id)
+            
+          }
         },
-        getTiposDeRevision(url){
-              axios.get(url).then(response=>{
-                this.tipo_revision = response.data.nombre
-                console.log(this.tipo_revision)
-        
+
+        filtrarProyectos() {
+            return this.grupos.filter(grupo => grupo.proyecto_id !== null);
+        },
+
+        async getGrupos(id){
+            await this.axios('http://127.0.0.1:8000/api/entregas/'+id+'/').then(response=>{
+                this.grupos = response.data.inscrito
             })
+            this.grupos = this.filtrarProyectos()
+            this.recorrerProyectosConProyecto(this.grupos)
+        },
+        async getProyecto(id){
+            
+            await this.axios.get("http://127.0.0.1:8000/api/proyecto/"+id+'/').then(response=>{
+              let proyecto =response.data
+              this.proyectos.push(proyecto) 
+            })
+            console.log
           },
           descripcion(descripcion){
             // descripcion corta
@@ -60,29 +88,35 @@
           },
       async search() {
         try {
-          const response = await axios.get("buscar_Entregass/", {
+          const response = await axios.get("buscar_proyectos/", {
             params: {
               search: this.searchValue,
             },
           });
-          this.Entregas = response.data;
+          this.proyecto = response.data;
         } catch (error) {
           console.log(error);
         }
         
       },
-      async verEntregas(id){
-        this.$router.push('/detalle-entrega/'+id)
+      async verProyecto(id){
+        this.$router.push('/detalle-proyecto/'+id)
       },
   
   
       },
       mounted() {  
-          this.getEntregas()
-         
-  
+          this.getGrupos(1)
       },
           
   
   }
   </script>
+
+<style>
+
+.imagen{
+    width: 100%;
+}
+
+</style>

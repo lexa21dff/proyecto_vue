@@ -77,11 +77,23 @@
         <b-form-group
           label="categorias:"
         >
-
-        <b-dropdown text="Seleccionar opciones">
+        <b-dropdown text="Seleccionar categorria">
           <b-form-checkbox-group v-model="proyecto.categorias" v-for="item in categorias" :key="item.id" >
             <b-form-checkbox  :value="item.url">
               {{ item.nombre }}
+            </b-form-checkbox>
+          </b-form-checkbox-group>
+          <b-dropdown-divider></b-dropdown-divider>
+          <b-dropdown-item >Seleccionar</b-dropdown-item>
+        </b-dropdown>
+        </b-form-group>
+        <b-form-group
+          label="grupo:"
+        >
+        <b-dropdown text="Seleccionar grupo">
+          <b-form-checkbox-group v-model="grupoSelecionado" v-for="item in grupos" :key="item.id" >
+            <b-form-checkbox  :value="item.id">
+              {{ item.nombre_grupo}}
             </b-form-checkbox>
           </b-form-checkbox-group>
           <b-dropdown-divider></b-dropdown-divider>
@@ -104,7 +116,7 @@
         <b-button type="reset" variant="danger">Cancelar</b-button>
         <b-button  @click="postProyecto()" class="enviar">Enviar</b-button>
       </b-form>
-      <div class="mt-3">Selected: <strong>{{proyecto.categorias}}</strong></div>
+      <div class="mt-3">Selected: <strong>{{this.grupoSelecionado}}</strong></div>
     </b-card>
   </div>
 </template>
@@ -115,6 +127,15 @@
   export default {
     data() {
       return {
+        perfil: this.$store.state.perfil.id,
+        grupoSelecionado:null,
+        grupo:{
+          id:null,
+          nombre_grupo:null,
+          integrantes:null,
+          proyecto:null
+        },
+        grupos:null,
         proyecto: { 
           nombre_proyecto: '',
           descripcion: '',
@@ -139,16 +160,44 @@
       async getCategoria(){
             await this.axios('http://127.0.0.1:8000/api/categoria/').then(response=>{
                 this.categorias = response.data
+                
             })
         },
+      async getGrupos(id){
+            await this.axios('http://127.0.0.1:8000/api/entregas/'+id+'/').then(response=>{
+                this.grupos = response.data.inscrito
+            })
+        },
+      async getGrupo(id){
+            await this.axios('http://127.0.0.1:8000/api/grupo/'+id+'/').then(response=>{
+                this.grupo.id = response.data.id
+                this.grupo.nombre_grupo = response.data.nombre_grupo
+                this.grupo.integrantes= response.data.integrantes
+            })
+        },
+      async editarGrupo(id){
+        await this.axios.put('http://127.0.0.1:8000/api/grupo/'+id+'/', this.grupo)
+
+      },
       async postProyecto(){
-        console.log(this.proyecto)
+        await this.getGrupo(this.grupoSelecionado)
         await this.axios.post('http://127.0.0.1:8000/api/proyecto/', this.proyecto)
-        this.$router.push('/ListaProyecto')
-      }
+        .then(response => {
+          this.grupo.proyecto = response.data.id
+          this.verProyecto(this.grupo.proyecto)
+          console.log(this.grupo)
+        })
+        await this.editarGrupo(this.grupo.id)
+
+      },
+      async verProyecto(id){
+        this.$router.push('/detalle-proyecto/'+id)
+      },
     },
     async mounted(){
         await this.getCategoria()
+        await this.getGrupos(this.perfil)
+        
     }
   }
 </script>

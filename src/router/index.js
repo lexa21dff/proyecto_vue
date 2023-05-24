@@ -3,12 +3,18 @@ import VueRouter from 'vue-router'
 import RegistrarView from '@/views/Registrar.vue'
 import LoginView from '@/views/Login.vue'
 import InicioView from '@/views/Inicio.vue'
+
 import ListaProyectoView from '@/views/ListaProyecto.vue'
 import VerProyectoView from '@/views/VerProyecto.vue'
 import CrearProyectoView from '@/views/CrearProyecto.vue'
-import EntregaView from '@/views/CrearEntrega.vue'
+import MisProyectoView from '@/views/MisProyectos.vue'
+import DetalleProyectoView from '@/views/Aprediz/DetalleProyecto.vue'
+import EditarProyectoView from '@/views/EditarProyecto.vue'
+
+import CrearEntregaView from '@/views/CrearEntrega.vue'
 import ListaEntrega from '@/views/ListaEntregas.vue'
-import Desarrolladores from '../views/Desarrolladores.vue'
+
+import Desarrolladores from '../views/Desarrolladores.vue' 
 import PoliticasyPrivacidad from '@/views/PoliticasyPrivacidad.vue'
 import terminosycondicionesVue from '@/views/terminosycondiciones.vue'
 
@@ -41,9 +47,24 @@ const routes = [
     component: ListaProyectoView
   },
   {
+    path: '/mis-proyectos',
+    name: 'mis-proyectos',
+    component: MisProyectoView
+  },
+  {
     path:'/ver-proyecto/:id',
     name: 'ver-proyecto',
     component: VerProyectoView
+  },
+  {
+    path:'/editar-proyecto/:id',
+    name: 'editar-proyecto',
+    component: EditarProyectoView
+  },
+  {
+    path:'/detalle-proyecto/:id',
+    name: 'detalle-proyecto',
+    component:DetalleProyectoView
   },
   {
     path:'/crear-proyecto',
@@ -51,9 +72,9 @@ const routes = [
     component: CrearProyectoView
   },
   {
-    path:'/entrega',
-    name: 'entrega',
-    component: EntregaView
+    path:'/crear-entrega',
+    name: 'crearentrega',
+    component: CrearEntregaView
   },
   {
     path:'/lista-entrega',

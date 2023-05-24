@@ -1,10 +1,10 @@
 <template>
-    <b-navbar toggleable="lg" type="light" variant="light">
+    <b-navbar class="navbar " toggleable="lg" type="light">
       <b-navbar-brand href="#">Projeck Banck </b-navbar-brand>
   
       <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
   
-      <b-collapse id="nav-collapse" is-nav>
+      <b-collapse id="nav-collapse" class=" navbar-collapse " is-nav>
         <b-navbar-nav>
           <!-- Enlaces de router a la izquierda  -->
           <b-nav-item to="/">Inicio</b-nav-item>
@@ -79,4 +79,18 @@
       }
   }
   </script>
+
+</style>
+/* Barra de navegacion */
+
+.navbar {
+  padding: 2rem;
+  background-color: #f5f6f7;
+}
+
+.navbar-collapse {
+  align-items: center;
+  justify-content: space-between;  
+}
+<style>
   
