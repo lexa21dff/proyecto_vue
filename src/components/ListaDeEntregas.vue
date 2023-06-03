@@ -50,9 +50,10 @@
         <b-card>  
             <b-list-group v-for="entrega in entregas" :key="entrega.id">
               <b-list-group-item class="d-flex justify-content-between align-items-center">
-                  <div class="m-1 p-3">
-                      {{ getTipoRevision(entrega.tipo_revision) }}
-                      
+                <div class="m-1 p-3">
+
+                  {{ entrega.tipo_revision.nombre }}
+                                      
                   </div>
                   <div class="d-flex position-absolute bottom-0 end-0 m-1"  >
                       <div class="ml-auto">
@@ -100,10 +101,10 @@ export default{
             console.log(id)
             await this.getEntregas()
         },
-        async getEntregas(){
-              await axios.get("http://127.0.0.1:8000/api/entrega/").then(response=>{
+        getEntregas(){
+            let id = this.$route.params.id
+              axios.get("http://127.0.0.1:8000/api/entregas/"+id+'/').then(response=>{
               this.entregas= response.data
-              console.log(this.entregas)
             })
         },
         crearEntrega(id){
@@ -114,9 +115,9 @@ export default{
           console.log(id)
             this.$router.push('/detalle-entrega/'+id)
         },
-        getTipoRevision(id){
+        async getTipoRevision(id){
               axios.get("http://127.0.0.1:8000/api/tipo_revision/"+id+'/').then(response=>{
-                this.tipo=response.data.nombre
+                this.tipo = response.data.nombre
                 console.log(this.tipo)
                 return this.tipo 
             })

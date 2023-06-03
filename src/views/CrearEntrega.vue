@@ -90,6 +90,7 @@
       async crearEntrega(){
         this.entrega.proyecto=this.id
         this.entrega.autor= this.perfil
+        console.log(this.entrega)
         await this.axios.post('http://127.0.0.1:8000/api/entrega/', this.entrega)
         .then(response => {
           

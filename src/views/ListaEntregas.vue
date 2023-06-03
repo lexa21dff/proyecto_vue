@@ -16,6 +16,7 @@
     <div>
       <h1>Entregas de {{ proyecto.nombre }}</h1>
       <b-card>
+        {{ entregas }}
         <b-list-group>
           <b-list-group-item v-for="entrega in entregas" :key="entrega.id">
             <div class="d-flex justify-content-between align-items-center">
@@ -50,8 +51,9 @@
       },
       methods:{
 
-          getEntregas(){
-              axios.get("http://127.0.0.1:8000/api/entrega/").then(response=>{
+        getEntregas(){
+            let id = this.route.params.id
+              axios.get("http://127.0.0.1:8000/api/entregas/"+id+'/').then(response=>{
               this.entregas= response.data
             })
         },

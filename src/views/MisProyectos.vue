@@ -62,7 +62,7 @@
         },
 
         async getGrupos(id){
-            await this.axios('http://127.0.0.1:8000/api/entregas/'+id+'/').then(response=>{
+            await this.axios('http://127.0.0.1:8000/api/proyectos/'+id+'/').then(response=>{
                 this.grupos = response.data.inscrito
             })
             this.grupos = this.filtrarProyectos()
@@ -106,7 +106,7 @@
   
       },
       mounted() {  
-          this.getGrupos(1)
+          this.getGrupos(3)
       },
           
   
