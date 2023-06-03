@@ -28,18 +28,7 @@
             required
           ></b-form-textarea>
         </b-form-group>
-        <b-form-group
-          id="descripcion_entrega"
-          label="Descripción de la Entrega:"
-          label-for="descripcion_entrega"
-        >
-          <b-form-textarea
-            id="descripcion_entrega"
-            v-model="entrega.descrpcion_entrega"
-            :rows="5"
-            required
-          ></b-form-textarea>
-        </b-form-group>
+        
         
         <b-form-group
           id="foto"
@@ -183,6 +172,7 @@
         await this.getGrupo(this.grupoSelecionado)
         await this.axios.post('http://127.0.0.1:8000/api/proyecto/', this.proyecto)
         .then(response => {
+          // asigna el id del proyecto creado al grupo seleccionado
           this.grupo.proyecto = response.data.id
           this.verProyecto(this.grupo.proyecto)
           console.log(this.grupo)

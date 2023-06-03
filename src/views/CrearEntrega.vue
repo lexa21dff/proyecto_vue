@@ -1,158 +1,122 @@
-<!-- <template>
-    <b-form @submit.prevent="submitForm">
-      <b-form-group label="Calificación">
-        <b-form-select v-model="calificacion" :options="calificacionOptions"></b-form-select>
-      </b-form-group>
-      <b-form-group label="Descripción de la entrega">
-        <b-form-textarea v-model="descripcion_entrega"></b-form-textarea>
-      </b-form-group>
-      <b-form-group label="Proyecto">
-        <b-form-select v-model="proyecto" :options="proyectoOptions"></b-form-select>
-      </b-form-group>
-      <b-form-group label="Tipo de revisión">
-        <b-form-select v-model="tipo_revision" :options="tipoRevisionOptions"></b-form-select>
-      </b-form-group>
-      <b-form-group label="Instructor">
-        <b-form-input v-model="instructor"></b-form-input>
-      </b-form-group>
-      <b-form-group label="Documento">
-        <b-form-file v-model="documento"></b-form-file>
-      </b-form-group>
-      <b-button type="submit">Enviar</b-button>
-    </b-form>
-  </template>
-  
-  <script>
-  import { mapState } from 'vuex'
+<template>
+  <div class="container ">
+    <b-card class="m-3">
+      <b-form>
+        <b-form-group
+          id="descripcion_entrega"
+          label="Descripción de la Entrega:"
+          label-for="descripcion_entrega"
+        >
+          <b-form-textarea
+            id="descripcion_entrega"
+            v-model="entrega.descripcion_entrega"
+            :rows="5"
+            required
+          ></b-form-textarea>
+        </b-form-group>
+        <b-form-group
+          id="documento"
+          label="Documento :"
+          label-for="documento"
+        >
+          <b-form-file
+            id="documento"
+            v-model="documento.documento"
+            multiple
+            accept=".pdf,.doc,.docx"
+          ></b-form-file>
+        </b-form-group>
+        <b-form-group id="tipo_revision" label="Tipo Revison">
+          <div>
+            <b-form-select v-model="entrega.tipo_revision">
+              <b-form-select-option v-for="option in tipo_de_revicion" :key="option.id" :value="option.id" >
+                {{ option.nombre }}
+              </b-form-select-option>
+            </b-form-select>
+          </div>
+        </b-form-group>
+      </b-form>
+      <div class=" position-absolute bottom-0 end-0">
+        <b-button class="m-1" type="reset" variant="danger">Cancelar</b-button>
+        <b-button  @click="crearEntrega()" class="m-1">Enviar</b-button>
+      </div>
+      {{ entrega }}
+    </b-card>
+  </div>
+</template>
 
-  
+
+
+<script>
   export default {
     data() {
       return {
-        calificacion: '',
-        descripcion_entrega: '',
-        proyecto: '',
-        tipo_revision: '',
-        instructor: '',
-        documento: null,
-        calificacionOptions: [
-          { value: 'Aprobado', text: 'Aprobado' },
-          { value: 'Reprobado', text: 'Reprobado' },
-        ],
-        proyectoOptions: [],
-        tipoRevisionOptions: [],
+        documento: {
+          documento:null,
+          entrega:null
+        },
+        id : this.$route.params.id,
+        perfil: this.$store.state.perfil.id,
+        grupos:null,
+        entrega:{
+          calificacion: null,
+          descripcion_entrega: null,
+          respuesta_instructor: null,
+          instructor: null,
+          proyecto: null,
+          tipo_revision: null,
+          autor: null
+
+        },
+        proyecto:null,
+        tipo_de_revicion:[]
       }
     },
-    async created() {
-      await this.fetchProyectos()
-      await this.fetchTipoRevision()
-    },
-    computed: {
-      ...mapState({
-        token: state => state.auth.token,
-      }),
-    },
     methods: {
-    //   async fetchProyectos() {
-    //     const response = await axios.get('/api/proyectos/', {
-    //       headers: { Authorization: `Bearer ${this.token}` },
-    //     })
-    //     this.proyectoOptions = response.data.results.map(p => ({
-    //       value: p.id,
-    //       text: p.nombre,
-    //     })) 
-    //   },
-    //   async fetchTipoRevision() {
-    //     const response = await axios.get('/api/tipo-revision/', {
-    //       headers: { Authorization: `Bearer ${this.token}` },
-    //     })
-    //     this.tipoRevisionOptions = response.data.results.map(t => ({
-    //       value: t.id,
-    //       text: t.nombre,
-    //     }))
-    //   },
-      async submitForm() {
-        // const formData = new FormData()
-        // formData.append('calificacion', this.calificacion)
-        // formData.append('descripcion_entrega', this.descripcion_entrega)
-        // formData.append('proyecto', this.proyecto)
-        // formData.append('tipo_revision', this.tipo_revision)
-        // formData.append('instructor', this.instructor)
-        // formData.append('documento', this.documento)
-        // try {
-        //   const response = await axios.post('/api/entregas/', formData, {
-        //     headers: {
-        //       Authorization: `Bearer ${this.token}`,
-        //       'Content-Type': 'multipart/form-data',
-        //     },
-        //   })
-        // //   const entregaId = response.data.id
-        // //   const documentoFormData = new FormData()
-        // //   documentoFormData.append('documento', this.documento)
-        // //   await axios.post(`/api/entregas/${entregaId}/documentos/`, documentoFormData, {
-        // //     headers: {
-        // //     }
-        }
-    }
-}   -->
 
+      async getProyecto(id){
+            await this.axios('http://127.0.0.1:8000/api/proyecto/'+id+'/').then(response=>{
+                this.proyecto = response.data.nombre
 
-<template>
-  <b-form @submit.prevent="handleSubmit">
-    <b-form-group id="calificacion" label="Calificación">
-      <b-form-radio-group v-model="entrega.calificacion" :options="calificacionOptions"></b-form-radio-group>
-    </b-form-group>
-    <b-form-group id="descripcion_entrega" label="Descripción">
-      <b-form-textarea v-model="entrega.descripcion_entrega"></b-form-textarea>
-    </b-form-group>
-    <b-form-group id="tipo_revision" label="Tipo de revisión">
-      <b-form-select v-model="entrega.tipo_revision" :options="tipoRevisionOptions"></b-form-select>
-    </b-form-group>
-    <b-form-group id="documento" label="Documento">
-      <b-form-file v-model="documento" accept=".pdf"></b-form-file>
-    </b-form-group>
-    <b-button type="submit" variant="primary">Guardar</b-button>
-  </b-form>
-</template>
+            })
+        },
+      async getTipoDeRevision(){
+            await this.axios('http://127.0.0.1:8000/api/tipo_revision/').then(response=>{
+                this.tipo_de_revicion = response.data
 
-<script>
-import axios from 'axios';
+            })
+        },
 
-export default {
-  data() {
-    return {
-      entrega: {
-        calificacion: '',
-        descripcion_entrega: '',
-        tipo_revision: '',
-        documento: null,
-      },
-      documento: null,
-      calificacionOptions: [
-        { text: 'Aprobado', value: 'aprobado' },
-        { text: 'Reprobado', value: 'reprobado' },
-      ],
-      tipoRevisionOptions: [
-        { text: 'Primera revisión', value: 'primera_revisión' },
-        { text: 'Segunda revisión', value: 'segunda_revisión' },
-      ],
-    };
-  },
-  methods: {
-    handleSubmit() {
-      const formData = new FormData();
-      formData.append('calificacion', this.entrega.calificacion);
-      formData.append('descripcion_entrega', this.entrega.descripcion_entrega);
-      formData.append('tipo_revision', this.entrega.tipo_revision);
-      formData.append('documento', this.documento);
-      axios.post('/api/entregas/', formData)
+      async crearEntrega(){
+        this.entrega.proyecto=this.id
+        this.entrega.autor= this.perfil
+        await this.axios.post('http://127.0.0.1:8000/api/entrega/', this.entrega)
         .then(response => {
-          console.log(response.data);
+          
+          this.documento.entrega = response.data.url
+
+        
+          console.log(this.documento)
+      
         })
-        .catch(error => {
-          console.log(error);
-        });
+        await this.crearDocumento()
+
+      },
+
+      async crearDocumento(){
+        await this.axios.post('http://127.0.0.1:8000/api/documento/', this.documento)
+
+      },
+
+
+      async verProyecto(id){
+        this.$router.push('/detalle-prosyecto/'+id)
+      },
     },
-  },
-};
+    async mounted(){
+      await this.getTipoDeRevision()
+
+        
+    }
+  }
 </script>

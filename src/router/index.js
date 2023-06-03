@@ -13,6 +13,8 @@ import EditarProyectoView from '@/views/EditarProyecto.vue'
 
 import CrearEntregaView from '@/views/CrearEntrega.vue'
 import ListaEntrega from '@/views/ListaEntregas.vue'
+import DetalleEntrega from '@/views/DetalleEntrega.vue'
+import ActualizarEntregaView from '@/views/actualizarEntrega.vue'
 
 import Desarrolladores from '../views/Desarrolladores.vue' 
 import PoliticasyPrivacidad from '@/views/PoliticasyPrivacidad.vue'
@@ -67,14 +69,24 @@ const routes = [
     component:DetalleProyectoView
   },
   {
+    path:'/detalle-entrega/:id',
+    name: 'detalle-entrega',
+    component:DetalleEntrega
+  },
+  {
     path:'/crear-proyecto',
     name: 'crear-proyecto',
     component: CrearProyectoView
   },
   {
-    path:'/crear-entrega',
+    path:'/crear-entrega/:id',
     name: 'crearentrega',
     component: CrearEntregaView
+  },
+  {
+    path:'/actualizar-entrega/:id',
+    name: 'actualizar-entrega',
+    component: ActualizarEntregaView
   },
   {
     path:'/lista-entrega',
